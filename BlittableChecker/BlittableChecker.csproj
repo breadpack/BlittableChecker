@@ -13,9 +13,11 @@
         </Description>
         <RepositoryUrl>https://github.com/breadpack/BlittableChecker</RepositoryUrl>
         <RepositoryType>github</RepositoryType>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release-Unity'">
         <PropertyGroup>
             <PackageOutputDir>$(SolutionDir)UnityPackage/Runtime</PackageOutputDir>
         </PropertyGroup>
