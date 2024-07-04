@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <LangVersion>9</LangVersion>
+
+        <AssemblyName>BreadPack.BlittableChecker</AssemblyName>
+        <PackageId>BreadPack.BlittableChecker</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>BreadPack</Authors>
+        <Company>BreadPack</Company>
+        <Description>
+            BlittableChecker ensures that structs marked with the [Blittable] attribute are blittable. It provides compile-time safety by generating errors if non-blittable fields are detected.
+        </Description>
+        <RepositoryUrl>https://github.com/breadpack/BlittableChecker</RepositoryUrl>
+        <RepositoryType>github</RepositoryType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis" Version="3.8.0"/>
+    </ItemGroup>
+
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
+        <PropertyGroup>
+            <PackageOutputDir>$(SolutionDir)UnityPackage/Plugin</PackageOutputDir>
+        </PropertyGroup>
+        <Message Text="Copying DLL and PDB files to $(PackageOutputDir)" Importance="high" />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(PackageOutputDir)" />
+        <Copy SourceFiles="$(OutputPath)$(AssemblyName).pdb" DestinationFolder="$(PackageOutputDir)" />
+        <Copy SourceFiles="@(ProjectReference)" DestinationFolder="$(PackageOutputDir)" Condition="'%(ProjectReference.Extension)' == '.dll' or '%(ProjectReference.Extension)' == '.pdb'" />
+
+        <Exec Command="powershell -File $(SolutionDir)Update-PackageVersion.ps1 $(Version)" />
+    </Target>
+    
+</Project>
