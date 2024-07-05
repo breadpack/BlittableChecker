@@ -1,10 +1,20 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 
 namespace BlittableCheckerGenerator {
     public static class ITypeSymbolExtension {
         public static bool IsBlittableType(this ITypeSymbol type, out string reason) {
+            var visited = new HashSet<string>();
+            return IsBlittableType(type, out reason, visited);
+        }
+
+        private static bool IsBlittableType(ITypeSymbol type, out string reason, HashSet<string> visited) {
             reason = string.Empty;
+            
+            if(!visited.Add(type.ToDisplayString()))
+                return true;
+
             switch (type.SpecialType) {
                 case SpecialType.System_Boolean:
                 case SpecialType.System_Byte:
@@ -32,7 +42,7 @@ namespace BlittableCheckerGenerator {
                         return false;
                     }
 
-                    if (member.Type.IsBlittableType(out reason))
+                    if (IsBlittableType(member.Type, out reason, visited))
                         continue;
                     
                     reason = $"Field '{member.Name}' is not blittable. - {reason}";

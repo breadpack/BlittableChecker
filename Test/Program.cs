@@ -8,10 +8,22 @@ public struct BasicTypesStruct
     public float  FloatValue;
 }
 
-//[Blittable]
+[Blittable]
 public struct PointerStruct
 {
     public unsafe int* PointerValue; // 포인터는 블리터블이 아닙니다.
+}
+
+[Blittable]
+public struct CircularReferenceStructA
+{
+    public CircularReferenceStructB StructB;
+}
+
+[Blittable]
+public struct CircularReferenceStructB
+{
+    public CircularReferenceStructA StructA;
 }
 
 [Blittable]
@@ -28,25 +40,25 @@ public struct NestedBlittableStruct
     public FixedArrayStruct FixedArrays;
 }
 
-//[Blittable]
+[Blittable]
 public struct RegularArrayStruct
 {
     public int[] IntArray; // Regular arrays are not blittable.
 }
 
-//[Blittable]
+[Blittable]
 public struct ReferenceTypeStruct
 {
     public string StringValue; // 이 필드는 블리터블이 아닙니다.
 }
 
-//[Blittable]
+[Blittable]
 public struct BoolArrayStruct
 {
     public bool[] BoolArray; // Regular arrays of blittable types are not blittable.
 }
 
-//[Blittable]
+[Blittable]
 public struct MixedArrayStruct
 {
     public        int[]            IntArray; // Regular arrays are not blittable.
@@ -54,7 +66,7 @@ public struct MixedArrayStruct
     public unsafe FixedArrayStruct FixedArrayStruct;
 }
 
-//[Blittable]
+[Blittable]
 public struct ComplexNestedStruct
 {
     public NestedBlittableStruct NestedBlittable;
@@ -62,13 +74,13 @@ public struct ComplexNestedStruct
     public RegularArrayStruct    RegularArrayStruct; // This field is not blittable.
 }
 
-//[Blittable]
+[Blittable]
 public struct AutoPropertyStruct
 {
     public int IntValue { get; set; } // 자동 속성은 블리터블이 아닙니다.
 }
 
-//[Blittable]
+[Blittable]
 public struct NestedNonBlittableStruct
 {
     public BasicTypesStruct    BasicTypes;

@@ -1,16 +1,16 @@
 {
-  "name": "dev.breadpack.blittablechecker",
-  "version": "1.0.0",
-  "displayName": "BlittableChecker",
-  "description": "BlittableChecker ensures that structs marked with the [Blittable] attribute are blittable, enhancing memory management and performance in Unity.",
-  "unity": "2022.3",
-  "keywords": [
-    "unity",
-    "package",
-    "blittable"
-  ],
-  "author": {
-    "name": "breadpack",
-    "email": "milennium9@gmail.com"
-  }
+    "name":  "dev.breadpack.blittablechecker",
+    "version":  "1.0.0",
+    "displayName":  "BlittableChecker",
+    "description":  "BlittableChecker ensures that structs marked with the [Blittable] attribute are blittable, enhancing memory management and performance in Unity.",
+    "unity":  "2022.3",
+    "keywords":  [
+                     "unity",
+                     "package",
+                     "blittable"
+                 ],
+    "author":  {
+                   "name":  "breadpack",
+                   "email":  "milennium9@gmail.com"
+               }
 }
