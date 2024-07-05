@@ -35,7 +35,7 @@ namespace BlittableCheckerGenerator {
                     if (member.Type.IsBlittableType(out reason))
                         continue;
                     
-                    reason = $"Field '{member.Name}' is not blittable: {reason}";
+                    reason = $"Field '{member.Name}' is not blittable. - {reason}";
                     return false;
                 }
 

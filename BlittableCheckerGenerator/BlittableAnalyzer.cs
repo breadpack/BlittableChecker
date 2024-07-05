@@ -37,19 +37,47 @@ namespace BlittableCheckerGenerator {
                                   .Any(ad => ad.AttributeClass.Equals(blittableAttributeSymbol, SymbolEqualityComparer.Default))
                 let reason = structSymbol.IsBlittableType(out var _reason) ? string.Empty : _reason
                 where !string.IsNullOrEmpty(reason)
-                select Diagnostic.Create(
-                    new(
-                        "BLT001",
-                        "Non-blittable struct",
-                        $"Struct '{structSymbol.Name}' is not blittable: {reason}",
-                        "Blittable",
-                        DiagnosticSeverity.Error,
-                        isEnabledByDefault: true),
-                    structDeclaration.Identifier.GetLocation()
+                select new {
+                    structSymbol,
+                    reason,
+                };
+
+            // generate diagnostics and source code that has compile error for each struct because of unity engine can not handle diagnostics
+            foreach (var info in diagnostics) {
+                var structSymbol = info.structSymbol;
+                var reason       = info.reason;
+
+                var diagnosticDescriptor = new DiagnosticDescriptor(
+                    id: "BLITTABLE001",
+                    title: "BlittableChecker",
+                    messageFormat: $"Struct '{structSymbol.Name}' is not blittable. - {reason}",
+                    category: "BlittableChecker",
+                    DiagnosticSeverity.Error,
+                    isEnabledByDefault: true,
+                    description: reason
                 );
-            
-            foreach (var diagnostic in diagnostics) {
+
+                var diagnostic = Diagnostic.Create(diagnosticDescriptor, structSymbol.Locations[0]);
                 context.ReportDiagnostic(diagnostic);
+
+//                 var structName = structSymbol.Name;
+//                 var location   = structSymbol.Locations[0];
+//                 var filePath   = location.GetLineSpan().Path.Replace("\\", "\\\\");
+//                 var lineNumber = location.GetLineSpan().StartLinePosition.Line + 1;
+//                 var source = $@"
+// namespace Generated
+// {{
+//     public static class {structName}BlittableCheck
+//     {{
+//         public static void EnsureBlittable()
+//         {{
+//             // This will cause a compile-time error
+//             int error = ""{structName} in {filePath} at line {lineNumber} contains non-blittable fields"";
+//         }}
+//     }}
+// }}
+// ";
+//                 context.AddSource($"{structName}_BlittableCheck.cs", source);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
 
         <AssemblyName>BreadPack.BlittableChecker</AssemblyName>
         <PackageId>BreadPack.BlittableChecker</PackageId>
@@ -24,7 +24,6 @@
         <Message Text="Copying DLL and PDB files to $(PackageOutputDir)" Importance="high" />
         <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(PackageOutputDir)" />
         <Copy SourceFiles="$(OutputPath)$(AssemblyName).pdb" DestinationFolder="$(PackageOutputDir)" />
-        <Copy SourceFiles="@(ProjectReference)" DestinationFolder="$(PackageOutputDir)" Condition="'%(ProjectReference.Extension)' == '.dll' or '%(ProjectReference.Extension)' == '.pdb'" />
     </Target>
 
 </Project>
