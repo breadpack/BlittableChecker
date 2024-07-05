@@ -1,16 +1,16 @@
 {
-    "name":  "dev.breadpack.blittablechecker",
-    "version":  "1.0.0",
-    "displayName":  "BlittableChecker",
-    "description":  "BlittableChecker는 Unity 프로젝트에서 구조체가 Blittable 타입인지 확인하여 메모리 관리와 퍼포먼스를 최적화하는 도구입니다. \nBlittable 타입은 특히 네이티브 플러그인과의 상호 작용에서 중요합니다. \n주요 기능으로는 구조체 검증, 상세 진단 및 Unity 통합이 있습니다. \nBlittableChecker를 사용하면 구조체의 설계에서 블리터블이 아닌 필드와 그 이유를 명확하게 파악할 수 있어 성능 최적화에 큰 도움이 됩니다.",
-    "unity":  "2022.3",
-    "keywords":  [
-                     "unity",
-                     "package",
-                     "blittable"
-                 ],
-    "author":  {
-                   "name":  "breadpack",
-                   "email":  "milennium9@gmail.com"
-               }
+  "name": "dev.breadpack.blittablechecker",
+  "version": "1.0.0",
+  "displayName": "BlittableChecker",
+  "description": "BlittableChecker ensures that structs marked with the [Blittable] attribute are blittable, enhancing memory management and performance in Unity.",
+  "unity": "2022.3",
+  "keywords": [
+    "unity",
+    "package",
+    "blittable"
+  ],
+  "author": {
+    "name": "breadpack",
+    "email": "milennium9@gmail.com"
+  }
 }
