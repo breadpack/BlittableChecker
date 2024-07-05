@@ -9,7 +9,7 @@ namespace BlittableCheckerGenerator {
             return IsBlittableType(type, out reason, visited);
         }
 
-        private static bool IsBlittableType(ITypeSymbol type, out string reason, HashSet<string> visited) {
+        private static bool IsBlittableType(this ITypeSymbol type, out string reason, HashSet<string> visited) {
             reason = string.Empty;
             
             if(!visited.Add(type.ToDisplayString()))
@@ -30,6 +30,9 @@ namespace BlittableCheckerGenerator {
                 case SpecialType.System_Char:
                     return true;
             }
+            
+            if(type.TypeKind == TypeKind.Enum)
+                return true;
 
             if (type.TypeKind == TypeKind.Struct) {
                 foreach (var member in type.GetMembers().OfType<IFieldSymbol>()) {
@@ -42,7 +45,7 @@ namespace BlittableCheckerGenerator {
                         return false;
                     }
 
-                    if (IsBlittableType(member.Type, out reason, visited))
+                    if (member.Type.IsBlittableType(out reason, visited))
                         continue;
                     
                     reason = $"Field '{member.Name}' is not blittable. - {reason}";
