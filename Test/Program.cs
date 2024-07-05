@@ -1,5 +1,17 @@
 ﻿using BlittableChecker;
 
+public enum EnumIsBlittable {
+    A,
+    B,
+    C
+}
+
+[Blittable]
+public struct EnumStruct
+{
+    public EnumIsBlittable EnumValue;
+}
+
 [Blittable]
 public struct BasicTypesStruct
 {
