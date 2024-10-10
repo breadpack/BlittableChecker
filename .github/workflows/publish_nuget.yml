@@ -34,11 +34,6 @@ jobs:
         run: |
           dotnet pack BlittableChecker/BlittableChecker.csproj --configuration Release --no-build --output ./nupkgs
           dotnet pack BlittableCheckerGenerator/BlittableCheckerGenerator.csproj --configuration Release --no-build --output ./nupkgs
-        
-      - name: Add GitHub Source
-        run: dotnet nuget add source "https://nuget.pkg.github.com/breadpack/index.json" --name "github" --username OWNER --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text
 
-      - name: Publish to GitHub Packages
-        run: dotnet nuget push ./nupkgs/*.nupkg --source "github" --skip-duplicate
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish the package
+        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json

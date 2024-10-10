@@ -4,17 +4,19 @@
         <TargetFramework>netstandard2.0</TargetFramework>
 
         <AssemblyName>BreadPack.BlittableChecker</AssemblyName>
-        <PackageId>BreadPack.BlittableChecker</PackageId>
+        <PackageId>dev.breadpack.BlittableChecker</PackageId>
         <Version>1.0.0</Version>
         <Authors>BreadPack</Authors>
         <Company>BreadPack</Company>
         <Description>
             BlittableChecker ensures that structs marked with the [Blittable] attribute are blittable. It provides compile-time safety by generating errors if non-blittable fields are detected.
         </Description>
-        <RepositoryUrl>https://github.com/breadpack/BlittableChecker</RepositoryUrl>
+        <RepositoryUrl>https://github.com/breadpack/BlittableChecker.git</RepositoryUrl>
         <RepositoryType>github</RepositoryType>
         <Configurations>Debug;Release</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <Title>BlittableChecker</Title>
+        <PackageProjectUrl>https://github.com/breadpack/BlittableChecker</PackageProjectUrl>
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release-Unity'">
