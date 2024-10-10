@@ -2,6 +2,7 @@ name: Build and publish NuGet package
 
 on:
   push:
+    branches: [ main ]
     tags:
       - 'v*.*.*'  # 태그가 vX.X.X 형식일 때만 실행
   workflow_dispatch: # This line allows manual triggering
