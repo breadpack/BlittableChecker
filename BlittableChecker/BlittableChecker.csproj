@@ -19,6 +19,10 @@
         <PackageProjectUrl>https://github.com/breadpack/BlittableChecker</PackageProjectUrl>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\BlittableCheckerGenerator\BlittableCheckerGenerator.csproj" />
+    </ItemGroup>
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release-Unity'">
         <PropertyGroup>
             <PackageOutputDir>$(SolutionDir)UnityPackage/Runtime</PackageOutputDir>
