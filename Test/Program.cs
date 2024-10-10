@@ -35,7 +35,7 @@ public struct CircularReferenceStructA
 [Blittable]
 public struct CircularReferenceStructB
 {
-    public CircularReferenceStructA StructA;
+    //public CircularReferenceStructA StructA;
 }
 
 [Blittable]
